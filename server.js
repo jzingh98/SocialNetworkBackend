@@ -8,7 +8,7 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const editprofile = require('./controllers/editprofile');
 const viewprofile = require('./controllers/viewprofile');
-
+const searchusers = require('./controllers/searchusers');
 
 
 const db = knex({
@@ -33,6 +33,8 @@ app.post('/signin', signin.handleSignin(db, bcrypt));
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) });
 app.put('/editprofile', (req, res) => { editprofile.handleEditProfile(req, res, db)});
 app.put('/viewprofile', (req, res) => { viewprofile.handleViewProfile(req, res, db)});
+app.put('/searchusers', (req, res) => { searchusers.handleSearchUsers(req, res, db)});
+
 
 
 app.listen(3001, ()=> {
