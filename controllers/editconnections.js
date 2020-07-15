@@ -23,12 +23,15 @@ const handleAddConnection = (req, res, db) => {
 
 const handleDeleteConnection = (req, res, db) => {
     console.log('editConnections Delete: ', req.body);
-    const {fromuser} = req.body;
-    if (!fromuser) {
-        return res.status(400).json('From user not provided');
+    const {fromuser, touser} = req.body;
+    if (!fromuser || !touser) {
+        return res.status(400).json('From user or to user not provided');
     }
 
-    db('connections').where('fromuser', '=', fromuser)
+    db('connections').where({
+        fromuser: fromuser,
+        touser:  touser
+    })
         .del()
         .returning('*')
         .then(entries => {

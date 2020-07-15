@@ -36,10 +36,10 @@ app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcry
 app.put('/editprofile', (req, res) => { editprofile.handleEditProfile(req, res, db)});
 app.put('/viewprofile', (req, res) => { viewprofile.handleViewProfile(req, res, db)});
 app.put('/searchusers', (req, res) => { searchusers.handleSearchUsers(req, res, db)});
-app.put('/editconnections/add', (req, res) => {editconnections.handleAddConnection(req, res, db)});
-app.put('/editconnections/delete', (req, res) => {editconnections.handleDeleteConnection(req, res, db)});
-app.put('/viewconnections', (req, res) => {searchconnections.handleSearchConnections(req, res, db)});
-
+app.put('/addconnection', (req, res) => {editconnections.handleAddConnection(req, res, db)});
+app.put('/deleteconnection', (req, res) => {editconnections.handleDeleteConnection(req, res, db)});
+app.put('/searchconnections', (req, res) => {searchconnections.handleSearchConnections(req, res, db)});
+app.put('/connectionstatus', (req, res) => {searchconnections.handleConnectionStatus(req, res, db)});
 
 
 
