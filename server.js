@@ -9,6 +9,7 @@ const signin = require('./controllers/signin');
 const editprofile = require('./controllers/editprofile');
 const viewprofile = require('./controllers/viewprofile');
 const searchusers = require('./controllers/searchusers');
+const editconnections = require('./controllers/editconnections');
 
 
 const db = knex({
@@ -34,6 +35,8 @@ app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcry
 app.put('/editprofile', (req, res) => { editprofile.handleEditProfile(req, res, db)});
 app.put('/viewprofile', (req, res) => { viewprofile.handleViewProfile(req, res, db)});
 app.put('/searchusers', (req, res) => { searchusers.handleSearchUsers(req, res, db)});
+app.put('/editconnections', (req, res) => {editconnections.handleAddConnection(req, res, db)});
+
 
 
 
