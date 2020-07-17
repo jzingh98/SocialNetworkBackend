@@ -11,6 +11,7 @@ const viewprofile = require('./controllers/viewprofile');
 const searchusers = require('./controllers/searchusers');
 const editconnections = require('./controllers/editconnections');
 const searchconnections = require('./controllers/searchconnections');
+const events = require('./controllers/events');
 
 
 const db = knex({
@@ -47,8 +48,10 @@ app.put('/searchconnections', (req, res) => {searchconnections.handleSearchConne
 app.put('/connectionstatus', (req, res) => {searchconnections.handleConnectionStatus(req, res, db)});
 app.put('/highlightconnections', (req, res) => {searchconnections.handleHighlightConnections(req, res, db)});
 
-
-
+app.put('/eventcreate', (req, res) => {events.handleCreateEvent(req, res, db)});
+app.put('/eventretrieve', (req, res) => {events.handleRetrieveEvents(req, res, db)});
+app.put('/eventupdate', (req, res) => {events.handleUpdateEvent(req, res, db)});
+app.put('/eventdelete', (req, res) => {events.handleDeleteEvent(req, res, db)});
 
 
 app.listen(3001, ()=> {
