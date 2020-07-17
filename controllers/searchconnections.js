@@ -35,10 +35,12 @@ const handleConnectionStatus = (req, res, db) => {
         touser:  touser
     })
         .then(user => {
-            console.log("data");
+            console.log("XXXXXXXXXXXXXXXXXXXXXXX");
             console.log(user);
             if (user.length) {
-                res.json(true)
+                res.json({
+                    type: user[0].type
+                })
             } else {
                 res.json(false)
             }
