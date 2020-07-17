@@ -40,6 +40,7 @@ app.put('/addconnection', (req, res) => {editconnections.handleAddConnection(req
 app.put('/deleteconnection', (req, res) => {editconnections.handleDeleteConnection(req, res, db)});
 app.put('/searchconnections', (req, res) => {searchconnections.handleSearchConnections(req, res, db)});
 app.put('/connectionstatus', (req, res) => {searchconnections.handleConnectionStatus(req, res, db)});
+app.put('/matchconnections', (req, res) => {searchconnections.handleHighlightMyConnections(req, res, db)});
 
 
 

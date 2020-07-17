@@ -46,7 +46,35 @@ const handleConnectionStatus = (req, res, db) => {
         .catch(err => res.status(400).json('error getting status'))
 };
 
+
+const handleHighlightMyConnections = (req, res, db) => {
+    console.log("handleHighlightMyConnections");
+    console.log(req.body);
+
+    const { searchTerm } = req.body;
+    if (!searchTerm) {
+        return res.status(400).json('From user not provided');
+    }
+
+    let query = '%'.concat(searchTerm, '%');
+
+    db.select('*').from('users').where('userName', 'like', query)
+        .join('connections', 'users.userName', '=', 'connections.touser')
+        .select('connections.touser')
+        .then(data => {
+            console.log("Matches: ");
+            console.log(data);
+            res.json(data);
+        })
+        .catch(err => res.status(400).json('error getting matches'))
+
+};
+
+
+
+
 module.exports = {
     handleSearchConnections,
-    handleConnectionStatus
+    handleConnectionStatus,
+    handleHighlightMyConnections
 };
