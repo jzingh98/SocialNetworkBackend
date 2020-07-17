@@ -31,17 +31,21 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req, res)=> { res.send(db) });
+
 app.post('/signin', signin.handleSignin(db, bcrypt));
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) });
+
 app.put('/editprofile', (req, res) => { editprofile.handleEditProfile(req, res, db)});
 app.put('/viewprofile', (req, res) => { viewprofile.handleViewProfile(req, res, db)});
 app.put('/searchusers', (req, res) => { searchusers.handleSearchUsers(req, res, db)});
+
 app.put('/addconnection', (req, res) => {editconnections.handleAddConnection(req, res, db)});
 app.put('/deleteconnection', (req, res) => {editconnections.handleDeleteConnection(req, res, db)});
 app.put('/updateconnectiontype', (req, res) => {editconnections.handleUpdateConnectionType(req, res, db)});
+
 app.put('/searchconnections', (req, res) => {searchconnections.handleSearchConnections(req, res, db)});
 app.put('/connectionstatus', (req, res) => {searchconnections.handleConnectionStatus(req, res, db)});
-app.put('/matchconnections', (req, res) => {searchconnections.handleHighlightMyConnections(req, res, db)});
+app.put('/highlightconnections', (req, res) => {searchconnections.handleHighlightConnections(req, res, db)});
 
 
 
