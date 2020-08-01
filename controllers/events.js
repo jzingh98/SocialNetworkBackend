@@ -12,7 +12,7 @@ const handleCreateEvent = (req, res, db) => {
             invited: invited,
             location: location,
             details: details,
-            time: time,
+            time: new Date(),
             duration: duration,
             created: new Date()
         })
