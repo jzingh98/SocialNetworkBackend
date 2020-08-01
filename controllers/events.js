@@ -71,12 +71,15 @@ const handleUpdateEvent = (req, res, db) => {
 
 
 const handleRetrieveEvents = (req, res, db) => {
-    console.log("handleSearchConnections");
+    console.log("handleRetrieveEvents");
     console.log(req.body);
     const { userName } = req.body;
     if (!userName) {
         return res.status(400).json('username not provided');
     }
+
+    //TODO: Add functionality to only select events intended to be visible to user
+
     db.select('*').from('events')
         .then(entries => {
             if (entries.length) {
