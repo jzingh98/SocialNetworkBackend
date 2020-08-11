@@ -1,5 +1,5 @@
 const handleCreateEvent = (req, res, db) => {
-    console.log("handleAddEvent");
+    console.log("handleCreateEvent");
     console.log(req.body);
     const {name, host, invited, location, details, time, duration} = req.body;
     if (!name || !host || !invited || !location || !details || !time || !duration) {
@@ -20,7 +20,7 @@ const handleCreateEvent = (req, res, db) => {
         .then(entries => {
             res.json(entries[0]);
         })
-        .catch(err => res.status(400).json('Unable to add event: ', err))
+        .catch(err => res.status(400).json('Unable to add event. Check fields: ', err))
 };
 
 

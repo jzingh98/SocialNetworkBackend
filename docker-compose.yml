@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+    # Backend API
+    social-network-backend:
+        container_name: backend
+        # image: node
+        build: ./
+        command: npm start
+        working_dir: /usr/src/SocialNetworkBackend
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: Khalsa98
+          POSTGRES_DB: smartapp_docker
+          POSTGRES_HOST: postgres
+        links:
+            - postgres
+        ports:
+            - "3001:3001"
+        volumes:
+            - ./:/usr/src/SocialNetworkBackend
+
+    # Postgres Database
+    postgres:
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: Khalsa98
+            POSTGRES_DB: smartapp_docker
+            POSTGRES_HOST: postgres
+        image: postgres
+        ports:
+            - "5403:5403"
