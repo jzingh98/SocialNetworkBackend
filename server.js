@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
-const morgan = require('morgan')
+const morgan = require('morgan');
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -14,15 +14,15 @@ const editconnections = require('./controllers/editconnections');
 const searchconnections = require('./controllers/searchconnections');
 const events = require('./controllers/events');
 
-
+console.log("ENV");
+console.log(process.env.URI);
 const db = knex({
   client: 'pg',
-  connection: {
-    host : process.env.POSTGRES_HOST,
-    user : process.env.POSTGRES_USER,
-    password : process.env.POSTGRES_PASSWORD,
-    database : process.env.POSTGRES_DB,
-  }
+  // connection: process.env.URI
+  host : '0.0.0.0',
+  user : 'postgres',
+  password : 'Khalsa98',
+  database : 'smartapp_docker'
 });
 
 const app = express();
@@ -32,8 +32,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-app.get('/', (req, res)=> { res.send("Pussy is very wet") });
-//app.get('/', (req, res)=> { res.send(db) });
+//app.get('/', (req, res)=> { res.send("Pussy is very wet") });
+app.get('/', (req, res)=> { res.send(db) });
 
 app.post('/signin', signin.handleSignin(db, bcrypt));
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) });

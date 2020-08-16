@@ -9,10 +9,7 @@ services:
         command: npm start
         working_dir: /usr/src/SocialNetworkBackend
         environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: Khalsa98
-          POSTGRES_DB: smartapp_docker
-          POSTGRES_HOST: postgres
+          URI: postgres://postgres:Khalsa98@postgres:5432/smartapp_docker
         links:
             - postgres
         ports:
@@ -27,6 +24,6 @@ services:
             POSTGRES_PASSWORD: Khalsa98
             POSTGRES_DB: smartapp_docker
             POSTGRES_HOST: postgres
-        image: postgres
+        build: ./postgres
         ports:
-            - "5403:5403"
+            - "5432:5432"

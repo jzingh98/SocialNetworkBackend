@@ -1,0 +1,13 @@
+BEGIN TRANSACTION;
+CREATE TABLE events (
+    id serial PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    host VARCHAR(100) NOT NULL,
+    invited VARCHAR(100) NOT NULL,
+    location VARCHAR(100) NOT NULL,
+    details VARCHAR(1000),
+    time TIMESTAMP NOT NULL,
+    duation BIGINT NOT NULL,
+    created TIMESTAMP NOT NULL
+    );
+COMMIT;
