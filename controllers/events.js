@@ -73,8 +73,8 @@ const handleUpdateEvent = (req, res, db) => {
 const handleRetrieveEvents = (req, res, db) => {
     console.log("handleRetrieveEvents");
     console.log(req.body);
-    const { userName } = req.body;
-    if (!userName) {
+    const { username } = req.body;
+    if (!username) {
         return res.status(400).json('username not provided');
     }
 

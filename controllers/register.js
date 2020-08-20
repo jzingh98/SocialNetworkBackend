@@ -1,13 +1,12 @@
 const handleRegister = (req, res, db, bcrypt) => {
     console.log('signUp: ', req.body);
-    const { email, firstName, lastName, userName, password, city, bio } = req.body;
-    if (!email || !firstName || !lastName || !userName || !password || !city || !bio) {
+    const { email, firstname, lastname, username, password, city, bio } = req.body;
+    if (!email || !firstname || !lastname || !username || !password || !city || !bio) {
         return res.status(400).json('Incorrect form submission');
     }
     const hash = bcrypt.hashSync(password);
 
     db.transaction(trx => {
-        console.log("AAAAAAAAAAAA");
         trx.insert({
             hash: hash,
             email: email,
@@ -15,15 +14,14 @@ const handleRegister = (req, res, db, bcrypt) => {
             .into('login')
             .returning('email')
             .then(loginEmail => {
-                console.log("BBBBBBBBBBBBBBBBBBB");
                 return trx('users')
                     .returning('*')
                     .insert({
                         email: loginEmail[0],
                         joined: new Date(),
-                        firstname: firstName,
-                        lastname: lastName,
-                        username: userName,
+                        firstname: firstname,
+                        lastname: lastname,
+                        username: username,
                         city: city,
                         bio: bio
                     })
@@ -43,5 +41,3 @@ const handleRegister = (req, res, db, bcrypt) => {
 module.exports = {
     handleRegister: handleRegister
 };
-
-

@@ -2,11 +2,11 @@
 const handleViewProfile = (req, res, db) => {
     console.log('handleViewProfile');
     console.log(req.body);
-    const { userName } = req.body;
-    if (!userName) {
-        return res.status(400).json('userName not provided');
+    const { name } = req.body;
+    if (!name) {
+        return res.status(400).json('name not provided');
     }
-    db.select('*').from('users').where({userName})
+    db.select('*').from('users').where({name})
         .then(user => {
             if (user.length) {
                 res.json(user[0])

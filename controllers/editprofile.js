@@ -1,16 +1,16 @@
 
 const handleEditProfile = (req, res, db) => {
     console.log('editProfile: ', req.body);
-    const {email, firstName, lastName, userName, city, bio} = req.body;
-    if (!email || !firstName || !lastName || !userName || !city || !bio) {
+    const {email, firstname, lastname, username, city, bio} = req.body;
+    if (!email || !firstname || !lastname || !username || !city || !bio) {
         return res.status(400).json('Email, name, city, or bio not provided');
     }
 
     db('users').where('email', '=', email)
         .update({
-            firstName: firstName,
-            lastName: lastName,
-            userName: userName,
+            firstname: firstname,
+            lastname: lastname,
+            username: username,
             city: city,
             bio: bio
         })

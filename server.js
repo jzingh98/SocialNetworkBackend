@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
@@ -14,15 +15,10 @@ const editconnections = require('./controllers/editconnections');
 const searchconnections = require('./controllers/searchconnections');
 const events = require('./controllers/events');
 
-console.log("ENV");
-console.log(process.env.URI);
+console.log(process.env.POSTGRES_URI);
 const db = knex({
-  client: 'pg',
-  // connection: process.env.URI
-  host : '0.0.0.0',
-  user : 'postgres',
-  password : 'Khalsa98',
-  database : 'smartapp_docker'
+    client: 'pg',
+    connection: process.env.POSTGRES_URI
 });
 
 const app = express();
@@ -57,6 +53,5 @@ app.put('/eventdelete', (req, res) => {events.handleDeleteEvent(req, res, db)});
 
 
 app.listen(3001, ()=> {
-  console.log('app is running on port 3001');
+    console.log('app is running on port 3001');
 });
-

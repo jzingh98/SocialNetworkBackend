@@ -1,29 +1,33 @@
 version: '3.6'
-
 services:
-    # Backend API
-    social-network-backend:
-        container_name: backend
-        # image: node
-        build: ./
-        command: npm start
-        working_dir: /usr/src/SocialNetworkBackend
-        environment:
-          URI: postgres://postgres:Khalsa98@postgres:5432/smartapp_docker
-        links:
-            - postgres
-        ports:
-            - "3001:3001"
-        volumes:
-            - ./:/usr/src/SocialNetworkBackend
 
-    # Postgres Database
+    # PostgreSQL
     postgres:
-        environment:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: Khalsa98
-            POSTGRES_DB: smartapp_docker
-            POSTGRES_HOST: postgres
+        container_name: postgres
         build: ./postgres
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: password
+            POSTGRES_URL: postgres://admin:password@localhost:5432/smart-brain
+            POSTGRES_DB: smart-brain
+            POSTGRES_HOST: postgres
         ports:
             - "5432:5432"
+
+
+    # Backend
+    smart-brain-api:
+        # env_file:
+        #   - ./.private/api-keys.env "Another way to insert env variables"
+        container_name: backend
+        build: ./
+        volumes:
+            - ./:/usr/src/smart-brain-api
+        command: npm start
+        working_dir: /usr/src/smart-brain-api
+        ports:
+            - "3001:3001"
+        environment:
+            POSTGRES_URI: postgres://admin:password@postgres:5432/smart-brain
+        links:
+            - postgres

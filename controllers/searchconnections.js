@@ -2,11 +2,11 @@
 const handleSearchConnections = (req, res, db) => {
     console.log("handleSearchConnections");
     console.log(req.body);
-    const { userName } = req.body;
-    if (!userName) {
+    const { username } = req.body;
+    if (!username) {
         return res.status(400).json('username not provided');
     }
-    db.select('*').from('connections').where('fromuser', 'like', userName)
+    db.select('*').from('connections').where('fromuser', 'like', username)
         .then(user => {
             if (user.length) {
                 res.json(user)
@@ -50,8 +50,8 @@ const handleHighlightConnections = (req, res, db) => {
         return res.status(400).json('searchTerm not provided');
     }
     let query = '%'.concat(searchTerm, '%');
-    db.select('*').from('users').where('userName', 'like', query)
-        .join('connections', 'users.userName', '=', 'connections.touser')
+    db.select('*').from('users').where('username', 'like', query)
+        .join('connections', 'users.username', '=', 'connections.touser')
         .select('connections.touser')
         .then(data => {
             res.json(data);

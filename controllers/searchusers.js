@@ -7,7 +7,7 @@ const handleSearchUsers = (req, res, db) => {
         return res.status(400).json('searchTerm not provided');
     }
     let query = '%'.concat(searchTerm, '%');
-    db.select('*').from('users').where('userName', 'like', query)
+    db.select('*').from('users').where('username', 'like', query)
         .then(user => {
             if (user.length) {
                 res.json(user)
