@@ -14,6 +14,7 @@ const searchusers = require('./controllers/searchusers');
 const editconnections = require('./controllers/editconnections');
 const searchconnections = require('./controllers/searchconnections');
 const events = require('./controllers/events');
+const posts = require('./controllers/posts');
 
 console.log(process.env.POSTGRES_URI);
 const db = knex({
@@ -28,7 +29,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-//app.get('/', (req, res)=> { res.send("Pussy is very wet") });
 app.get('/', (req, res)=> { res.send(db) });
 
 app.post('/signin', signin.handleSignin(db, bcrypt));
@@ -51,6 +51,10 @@ app.put('/eventretrieve', (req, res) => {events.handleRetrieveEvents(req, res, d
 app.put('/eventupdate', (req, res) => {events.handleUpdateEvent(req, res, db)});
 app.put('/eventdelete', (req, res) => {events.handleDeleteEvent(req, res, db)});
 
+app.put('/postcreate', (req, res) => {posts.handleCreatePost(req, res, db)});
+app.put('/postretrieve', (req, res) => {posts.handleRetrievePosts(req, res, db)});
+app.put('/postupdate', (req, res) => {posts.handleUpdatePost(req, res, db)});
+app.put('/postdelete', (req, res) => {posts.handleDeletePost(req, res, db)});
 
 app.listen(3001, ()=> {
     console.log('app is running on port 3001');
