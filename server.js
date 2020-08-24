@@ -53,8 +53,6 @@ app.put('/eventdelete', (req, res) => {events.handleDeleteEvent(req, res, db)});
 
 app.put('/postcreate', (req, res) => {posts.handleCreatePost(req, res, db)});
 app.put('/postretrieve', (req, res) => {posts.handleRetrievePosts(req, res, db)});
-app.put('/postupdate', (req, res) => {posts.handleUpdatePost(req, res, db)});
-app.put('/postdelete', (req, res) => {posts.handleDeletePost(req, res, db)});
 
 app.listen(3001, ()=> {
     console.log('app is running on port 3001');
